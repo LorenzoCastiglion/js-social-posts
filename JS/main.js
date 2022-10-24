@@ -131,31 +131,31 @@ posts.forEach(element => {
     
 });
 
-let userDefault = document.getElementsByClassName('post-meta_icon')
-console.log(userDefault);
+// let userDefault = document.getElementsByClassName('post-meta_icon')
+// console.log(userDefault);
 
-posts.forEach(element =>{
+// posts.forEach(element =>{
 
-    if (element.author.image === null){
-        userDefault.classList.add('profile-pic-default');
-    }
-})
+//     if (element.author.image === null){
+//         userDefault.classList.add('profile-pic-default');
+//     }
+// })
 
 
 let btnLikes  = document.querySelector('.like-button');
 
 console.log(btnLikes)
 
-let likes = posts.map(a => a.likes);
+let likes = document.getElementsByClassName('js-likes-counter');
 
-
+let likesHTML = parseInt(likes.item(0).innerHTML);
 
 let likesCounter = function(){
 
     btnLikes.classList.toggle('like-button--liked');
-    likes++;
-
-
+    likesHTML++;
+    likes.item(0).innerHTML = likesHTML
+    console.log(likesHTML);
 };
 
 btnLikes.addEventListener("click", likesCounter );
