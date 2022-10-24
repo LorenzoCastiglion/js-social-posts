@@ -22,7 +22,7 @@
 
 "use strict"
 
-const element = [
+const posts = [
     {
         "id": 1,
         "content": "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.",
@@ -86,7 +86,7 @@ let container = document.getElementById('container')
 
 
 // creazione post dinamica
-element.forEach(element => {
+posts.forEach(element => {
 
     let post = document.createElement('div');
 
@@ -119,7 +119,7 @@ element.forEach(element => {
                 
             </div>
             <div class="likes__counter">
-                Piace a <b id="like-counter-1" class="js-likes-counter">${element.likes}</b> persone
+                Piace a <b id="like-counter-${element.id}" class="js-likes-counter">${element.likes}</b> persone
             </div>
         </div> 
     </div>            
@@ -133,9 +133,9 @@ element.forEach(element => {
 let btnLikes  = document.getElementsByClassName('like-button');
 
 
-let likesCounter = document.getElementById('like-counter-1');
+let likesCounter = document.querySelectorAll('js-likes-counter');
 
-    let likes = parseInt(likesCounter.innerHTML);
+    let likes = parseInt(likesCounter.value);
     console.log(likes);
 
-    console.log(element.likes)
+    console.log(posts.likes)
