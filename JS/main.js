@@ -160,6 +160,7 @@ posts.forEach(element => {
 
 let btnLikes  = document.querySelector('.like-button');
 
+
 console.log(btnLikes)
 
 let likes = document.getElementsByClassName('js-likes-counter');
@@ -187,3 +188,4 @@ let likesCounter = function(){
 btnLikes.addEventListener("click", likesCounter );
 
 console.log(likes);
+
