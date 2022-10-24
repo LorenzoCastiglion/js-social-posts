@@ -85,6 +85,7 @@ let container = document.getElementById('container')
 
 
 
+
 // creazione post dinamica
 posts.forEach(element => {
 
@@ -126,16 +127,37 @@ posts.forEach(element => {
 </div>
     `;
     container.append(post);
+   
     
 });
 
+let userDefault = document.getElementsByClassName('post-meta_icon')
+console.log(userDefault);
 
-let btnLikes  = document.getElementsByClassName('like-button');
+posts.forEach(element =>{
+
+    if (element.author.image === null){
+        userDefault.classList.add('profile-pic-default');
+    }
+})
 
 
-let likesCounter = document.querySelectorAll('js-likes-counter');
+let btnLikes  = document.querySelector('.like-button');
 
-    let likes = parseInt(likesCounter.value);
-    console.log(likes);
+console.log(btnLikes)
 
-    console.log(posts.likes)
+let likes = posts.map(a => a.likes);
+
+
+
+let likesCounter = function(){
+
+    btnLikes.classList.toggle('like-button--liked');
+    likes++;
+
+
+};
+
+btnLikes.addEventListener("click", likesCounter );
+
+console.log(likes);
