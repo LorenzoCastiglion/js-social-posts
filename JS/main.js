@@ -158,34 +158,59 @@ posts.forEach(element => {
 // })
 
 
-let btnLikes  = document.querySelector('.like-button');
+let btnLikes  = document.querySelectorAll('.like-button');
+
+// btnLikes.forEach(element =>  element.addEventListener('click',likesCounter));
 
 
-console.log(btnLikes)
 
-let likes = document.getElementsByClassName('js-likes-counter');
-
-let likesHTML = parseInt(likes.item(0).innerHTML);
-
+for(let element of btnLikes){
+    element.addEventListener('click',likesCounter);
+}
 
 let onClick = false;
 
-let likesCounter = function(){
+function likesCounter(){
     onClick = !onClick
-
+    const numLikes = document.querySelector(`#like-counter-${this.dataset.postid}`);
   if(onClick){
-    btnLikes.classList.toggle('like-button--liked');
-    likesHTML++;
-    likes.item(0).innerHTML = likesHTML
+    this.classList.toggle('like-button--liked');
+    let likes = parseInt(numLikes.textContent)
+    likes++;
+    numLikes.textContent = likes
   }else{
-    btnLikes.classList.toggle('like-button--liked')
-    likesHTML--;
-    likes.item(0).innerHTML = likesHTML
+    this.classList.toggle('like-button--liked')
+    let likes = parseInt(numLikes.textContent)
+    likes--;
+    numLikes.textContent = likes
   }
-    console.log(likesHTML);
+  event.preventDefault()
 };
 
-btnLikes.addEventListener("click", likesCounter );
 
-console.log(likes);
 
+
+
+// const btns = document.querySelectorAll('.js-like-button');
+
+// for(let element of btns){
+//     element.addEventListener('click',handleClick);
+// }
+
+
+// function handleClick(){
+//     const numbOfLikes = document.querySelector(`#like-counter-${this.dataset.postid}`);
+//     console.log(numbOfLikes)
+//     if(!this.classList.contains('like-button--liked')){
+//         this.classList.add('like-button--liked');
+//         let numb = parseInt(numbOfLikes.textContent);
+//         numb++;
+//         numbOfLikes.textContent = numb
+//     }else{
+//         this.classList.remove('like-button--liked');
+//         let numb = parseInt(numbOfLikes.textContent);
+//         numb--;
+//         numbOfLikes.textContent = numb
+//     }
+    
+// }
