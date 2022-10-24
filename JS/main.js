@@ -150,11 +150,21 @@ let likes = document.getElementsByClassName('js-likes-counter');
 
 let likesHTML = parseInt(likes.item(0).innerHTML);
 
-let likesCounter = function(){
 
+let onClick = false;
+
+let likesCounter = function(){
+    onClick = !onClick
+
+  if(onClick){
     btnLikes.classList.toggle('like-button--liked');
     likesHTML++;
     likes.item(0).innerHTML = likesHTML
+  }else{
+    btnLikes.classList.toggle('like-button--liked')
+    likesHTML--;
+    likes.item(0).innerHTML = likesHTML
+  }
     console.log(likesHTML);
 };
 
