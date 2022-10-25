@@ -85,15 +85,12 @@ const posts = [
 
 // per prendere la data in formato DD/MM/YYYY
 
-const today = new Date();
-const yyyy = today.getFullYear();
-let mm = today.getMonth() + 1; 
-let dd = today.getDate();
-
-if (dd < 10) dd = '0' + dd;
-if (mm < 10) mm = '0' + mm;
-
-const formattedToday = dd + '/' + mm + '/' + yyyy;
+function formatDate(createdat){
+    const d = new Date(createdat);
+    let formattedDate = d.toLocaleDateString('it-IT');
+    console.log(formattedDate);
+    return formattedDate;
+}
 
 
 
@@ -115,11 +112,11 @@ posts.forEach(element => {
     <div class="post__header">
         <div class="post-meta">                    
             <div class="post-meta__icon">
-                <img class="profile-pic" src="${element.author.image}" alt="${element.name}">                    
+            ${getProfile(element.author)}                         
             </div>
             <div class="post-meta__data">
                 <div class="post-meta__author">${element.author.name}</div>
-                <div class="post-meta__time">${formattedToday}</div>
+                <div class="post-meta__time">${formatDate(element.created)}</div>
             </div>                    
         </div>
     </div>
@@ -149,29 +146,17 @@ posts.forEach(element => {
     
 });
 
-// let userDefault = document.getElementsByClassName('post-meta_icon')
-// console.log(userDefault);
 
-// posts.forEach(element =>{
-
-//     if (element.author.image === null){
-//         userDefault.classList.add('profile-pic-default');
-//     }
-// })
 
 
 let btnLikes  = document.querySelectorAll('.like-button');
 
-// btnLikes.forEach(element =>  element.addEventListener('click',likesCounter));
-
-
-
-for(let element of btnLikes){
-    element.addEventListener('click',likesCounter);
-}
-
 let onClick = false;
 
+// btnLikes.forEach(element =>  element.addEventListener('click',likesCounter));
+btnLikes.forEach(element => {
+    element.addEventListener('click',likesCounter);
+    
 function likesCounter(){
     onClick = !onClick
     const numLikes = document.querySelector(`#like-counter-${this.dataset.postid}`);
@@ -187,32 +172,23 @@ function likesCounter(){
     numLikes.textContent = likes
   }
   event.preventDefault()
-};
+}});
 
 
+// aggiungere un immagine profilo placeholder quando non è presente un immagine profilo
 
 
-
-// const btns = document.querySelectorAll('.js-like-button');
-
-// for(let element of btns){
-//     element.addEventListener('click',handleClick);
-// }
-
-
-// function handleClick(){
-//     const numbOfLikes = document.querySelector(`#like-counter-${this.dataset.postid}`);
-//     console.log(numbOfLikes)
-//     if(!this.classList.contains('like-button--liked')){
-//         this.classList.add('like-button--liked');
-//         let numb = parseInt(numbOfLikes.textContent);
-//         numb++;
-//         numbOfLikes.textContent = numb
-//     }else{
-//         this.classList.remove('like-button--liked');
-//         let numb = parseInt(numbOfLikes.textContent);
-//         numb--;
-//         numbOfLikes.textContent = numb
-//     }
-    
-// }
+function getProfile(profile){
+    if(profile.image){
+     return `<img class="profile-pic" src="${profile.image}" alt="${profile.name}">`;          
+    } else {
+     let initials = profile.name.split(' ').reduce((acc,value)=>{
+         return acc + value.charAt(0);
+     },'');
+     return `
+         <div class="profile-pic-default">
+             <span>${initials}</span>
+         </div> 
+     `;
+    }
+ }
